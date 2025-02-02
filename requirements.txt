@@ -1,0 +1,6 @@
+boto3
+python-dotenv
+langsmith
+langchain
+openai
+supabase

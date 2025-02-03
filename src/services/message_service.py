@@ -1,10 +1,10 @@
 from services.command_service import is_command, handle_command
 from models.user_model import get_user
-from services.expense_service import is_expense
+from services.expense_service import is_expense, extract_expense_category, extract_expense_amount
+from models.expense_model import create_expense
+from utils.message_response import get_message_response, Responses
 
 def process_message(message_content):
-    """Procesa el mensaje con LangChain y lo guarda en Supabase si es un gasto."""
-    
     try:
         telegram_id = message_content["chatId"]
         text = message_content["text"]
@@ -20,7 +20,23 @@ def process_message(message_content):
             isExpense = is_expense(text)
             
             if isExpense:
-                return {"status": "saved", "data": response}
+                category = extract_expense_category(text)
+                print('Category', category)
+                amount = extract_expense_amount(text)
+                print('Amount', amount)
+                
+                expense_data = {
+                    "description": text,
+                    "amount": amount,
+                    "category": category,
+                    "user_id": user["id"],
+                    "added_at": "now()"
+                }
+                
+                response = create_expense(expense_data)
+                print('Response DB expense', response)
+                
+                return get_message_response(Responses.ADDED, category)
 
     except Exception as e:
         print(f"Error when processing message with LangChain: {e}")

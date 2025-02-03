@@ -73,9 +73,9 @@ Python v3.13 or later
 
 2. Go to bot https://t.me/final_expense_bot and send the start command
 
-    ```
-    /start
-    ```
+```
+/start
+ ```
 
 <br><br>
 ## More info

@@ -71,7 +71,7 @@ Python v3.13 or later
      python src/main.py
     
 
-2. Go to bot https://t.me/final_expense_bot and send the start command
+2. Go to bot created and send the start command
 
 ```
 /start
@@ -81,3 +81,29 @@ Python v3.13 or later
 ## More info
 
 This project is responsible for processing messages using AI models to identify whether they are expenses. Once the message is identified, it will store the information in a database and send a response to the [Hermes](https://github.com/GabrielLaTorre/Hermes) connector, who will notify the user through the Telegram API.
+
+In order to run this service you will need to register on the following platforms and obtain the credentials needed to configure the environment variables.
+
+- [OPENAI](https://openai.com/)
+- [LANGSMITH](https://smith.langchain.com/)
+- [SUPABASE](https://supabase.com/)
+
+In addition, in Supabase it will be necessary to create two tables: "expenses" and "users". With the following schemas:
+
+```
+CREATE TABLE users (
+"id" SERIAL PRIMARY KEY,
+"telegram_id" text UNIQUE NOT NULL
+);
+```
+
+```
+CREATE TABLE expenses (
+"id" SERIAL PRIMARY KEY,
+"user_id" integer NOT NULL REFERENCES users("id"),
+"description" text NOT NULL,
+"amount" money NOT NULL,
+"category" text NOT NULL,
+"added_at" timestamp NOT NULL
+);
+```

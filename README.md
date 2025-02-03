@@ -68,9 +68,8 @@ Python v3.13 or later
 
 1 Run the command
 
-    ```
-    python src/main.py
-    ```
+     python src/main.py
+    
 
 2. Go to bot https://t.me/final_expense_bot and send the start command
 

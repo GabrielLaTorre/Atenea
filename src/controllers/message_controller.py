@@ -7,12 +7,11 @@ def receive_messages():
     
     while True:
         messages = sqs_client.receiveMessages()
-        print('Received messages:', messages)
+        
         for message in messages:
             message_body = json.loads(message["Body"])
             receipt_handle = message["ReceiptHandle"]
             message_content = message_body["message"]
-            print('Message body', message_body)
             
             response = process_message(message_content)
             

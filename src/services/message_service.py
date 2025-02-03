@@ -8,10 +8,7 @@ def process_message(message_content):
     try:
         telegram_id = message_content["chatId"]
         text = message_content["text"]
-        
         user = get_user(telegram_id)
-        
-        print('User: ', user)
         
         if user is None:
             if is_command(text):
@@ -21,9 +18,7 @@ def process_message(message_content):
             
             if isExpense:
                 category = extract_expense_category(text)
-                print('Category', category)
                 amount = extract_expense_amount(text)
-                print('Amount', amount)
                 
                 expense_data = {
                     "description": text,
@@ -34,9 +29,11 @@ def process_message(message_content):
                 }
                 
                 response = create_expense(expense_data)
-                print('Response DB expense', response)
                 
-                return get_message_response(Responses.ADDED, category)
+                return {
+                    "chat_id": telegram_id,
+                    "message": get_message_response(Responses.ADDED, category)
+                }
 
     except Exception as e:
         print(f"Error when processing message with LangChain: {e}")

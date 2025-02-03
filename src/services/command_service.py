@@ -5,13 +5,19 @@ def handle_command(data):
     command = data["text"]
     
     if command == "/start":
-        return get_message_response(Responses.WELCOME)
+        return {
+                "chat_id": telegram_id,
+                "message": get_message_response(Responses.WELCOME)
+                }
     if command == "/register":
         telegram_id = data["chatId"]
         
         create_user(telegram_id)
         
-        return get_message_response(Responses.REGISTERED)
+        return {
+                "chat_id": telegram_id,
+                "message": get_message_response(Responses.REGISTERED)
+                }
     else:
         print("Comando no reconocido:", command)
         

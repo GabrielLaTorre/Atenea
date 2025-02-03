@@ -6,7 +6,7 @@ def handle_command(data):
     
     if command == "/start":
         return {
-                "chat_id": telegram_id,
+                "chat_id": data["chatId"],
                 "message": get_message_response(Responses.WELCOME)
                 }
     if command == "/register":

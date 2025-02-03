@@ -2,7 +2,7 @@ from services.command_service import is_command, handle_command
 from models.user_model import get_user
 from services.expense_service import is_expense, extract_expense_category, extract_expense_amount
 from models.expense_model import create_expense
-from utils.message_response import get_message_response, Responses
+from utils.message_response import get_message_response, get_error_message, Responses
 
 def process_message(message_content):
     try:
@@ -37,4 +37,4 @@ def process_message(message_content):
 
     except Exception as e:
         print(f"Error when processing message with LangChain: {e}")
-        return {"status": "error", "message": str(e)}
+        return get_error_message()

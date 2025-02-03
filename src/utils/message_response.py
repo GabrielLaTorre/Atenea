@@ -4,6 +4,7 @@ class Responses(Enum):
     WELCOME = "WELCOME"
     REGISTERED = "REGISTERED"
     ADDED = "ADDED"
+    ERROR = "ERROR"
 
 
 def get_message_response(message_type, data=""):
@@ -12,6 +13,8 @@ def get_message_response(message_type, data=""):
     elif message_type.value == Responses.REGISTERED.value:
         return get_registered_message()
     elif message_type.value == Responses.ADDED.value:
+        return get_added_message(data)
+    elif message_type.value == Responses.ERROR.value:
         return get_added_message(data)
 
 
@@ -25,3 +28,6 @@ def get_registered_message():
 
 def get_added_message(category):
     return f"[{category}] Expense added! ✅"
+
+def get_error_message():
+    return "Something didn't go as expected. Please try again. ⚠️"

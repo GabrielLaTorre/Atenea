@@ -19,7 +19,7 @@ def handle_command(data):
                 "message": get_message_response(Responses.REGISTERED)
                 }
     else:
-        print("Comando no reconocido:", command)
+        print("Unrecognized command:", command)
         
 def is_command(message_text):
     return message_text.startswith("/")

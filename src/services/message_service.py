@@ -37,4 +37,7 @@ def process_message(message_content):
 
     except Exception as e:
         print(f"Error when processing message with LangChain: {e}")
-        return get_error_message()
+        return {
+                    "chat_id": telegram_id,
+                    "message": get_error_message()
+                }

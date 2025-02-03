@@ -11,7 +11,7 @@ def is_expense(message):
         return "True" in result
     except Exception as e:
         print(f"Error when analizing message with LangChain: {e}")
-        return False
+        raise e
 
 def extract_expense_category(message):
     try:
@@ -22,7 +22,7 @@ def extract_expense_category(message):
         return result
     except Exception as e:
         print(f"Error when extracting category with LangChain: {e}")
-        return None
+        raise e
     
 def extract_expense_amount(message):
     try:
@@ -33,4 +33,4 @@ def extract_expense_amount(message):
         return result
     except Exception as e:
         print(f"Error when extracting amount with LangChain: {e}")
-        return None
+        raise e
